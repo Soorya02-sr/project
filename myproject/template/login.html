@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            
+            background-image:url("dental.jpg");
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(32, 188, 202, 0.686);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 7px;
+            background-color: #121818;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4c92ae;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form action="{% url 'home' %}" id="loginForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <div class="error" id="error"></div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorDiv = document.getElementById('error');
+
+        // Reset error message
+        errorDiv.textContent = '';
+
+        // Basic validation
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        // Basic validation
+        if (username === '' || password === '') {
+            errorDiv.textContent = 'Please fill in all fields.';
+        } else if (username !== validUsername) {
+            errorDiv.textContent = 'Invalid username.';
+        } else if (!passwordRegex.test(password)) {
+            errorDiv.textContent = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character.';
+        } else if (password !== validPassword) {
+            errorDiv.textContent = 'Invalid password.';
+        } else {
+            // Simulate successful login
+            alert('Login successful!');
+            // Here you can add more logic for what happens after a successful login
+        }
+    });
+</script>
+
+</body>
+</html>
+
