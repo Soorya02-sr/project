@@ -1,129 +1,139 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image:url("dental.jpg");
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 400px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px  rgba(32, 188, 202, 0.686);
-        }
-        h2 {
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 2px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            background-color:  #0e1414;
-            color: white;
-            border: none;
-            padding: 2px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        input[type="submit"]:hover {
-            background-color:  #0b1010;
-        }
-    </style>
+    <title>Patient Register</title>
+<style>
+    body {
+        background-image: url('{% static "images/new.jpg" %}');
+        background-size: cover;
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        background-image: url("dental.jpg");
+    }
+    
+    .signup-container {
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        min-height: 100vh; /* Ensure it takes full height */
+    }
+    
+    .signup-card {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(11, 223, 247, 0.73);
+        transition: transform 0.2s;
+        width: 400px; /* Set a fixed width for the card */
+    }
+    
+    .signup-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .form-control {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #c6f3fec8;
+        border-radius: 4px;
+        width: calc(100% - 22px); /* Adjust width to account for padding */
+        box-sizing: border-box;
+    }
+    
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+</style>    
+    
 </head>
 <body>
 
-<div class="container">
-    <h2>Patient Registration</h2>
-    <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required>
-
-        <label for="mobile">Mobile:</label>
-        <input type="text" id="mobile" name="mobile" required>
-
-        
-
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-            <option value="">Select...</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
-
-        <label for="place">Place:</label>
-        <input type="text" id="place" name="place" required>
-
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <input type="submit" value="Register">
-    </form>
+<div class="container signup-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="signup-card">
+                <h2 class="text-center mb-4">REGISTRATION</h2>
+                <form method="POST" action="/register/">
+                    {% csrf_token %}
+                    <!-- Form fields -->
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Contact No:</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" maxlength="10" placeholder="Enter your mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="place">Place</label>
+                        <input type="text" class="form-control" id="place" name="place" placeholder="place" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" maxlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" placeholder="Create a password" title="Must contain at least one uppercase letter, one lowercase letter, one number, and one special character, and be at least 8 characters long."  required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
 
-        const name = document.getElementById('name').value;
-        const age = document.getElementById('age').value;
-        const mobile = document.getElementById('mobile').value;
-        const gender = document.getElementById('gender').value;
-        const place = document.getElementById('place').value;
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const errorDiv = document.getElementById('error');
+        form.addEventListener("submit", function(event) {
+            const mobile = document.getElementById("mobile").value;
+            const age = document.getElementById("age").value;
 
-        // Reset error message
-        errorDiv.textContent = '';
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            // Validate mobile number
+            if (!/^\d{10}$/.test(mobile)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                event.preventDefault(); // Prevent form submission
+            }
 
-
-        // Basic validation
-        if (!name || !age || !mobile || !gender || !place || !username || !password) {
-            errorDiv.textContent = 'Please fill in all fields.';
-        } else if (mobile.length !== 10) {
-            errorDiv.textContent = 'Mobile number must be 10 digits.';
-        }
-        
-            else if (!passwordRegex.test(password)) {
-            errorDiv.textContent = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character.';
-        } else if (password !== validPassword) {
-            errorDiv.textContent = 'Invalid password.';
-
-        } else {
-            // Simulate successful registration
-            alert('Registration successful!');
-            // Here you can add more logic for what happens after a successful registration
-        }
+            // Validate age
+            if (age <= 0) {
+                alert("Please enter a valid age.");
+                event.preventDefault(); // Prevent form submission
+            }
+        });
     });
 </script>
 

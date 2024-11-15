@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Our Doctors</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font for better aesthetics */
+            background-color: #f7f9fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Section */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #4ae2dd;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+       
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            margin-top: 8px;
+            font-style: italic; /* Added italic style for emphasis */
+        }
+
+        /* Case Buttons */
+        .case-buttons {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        .case-buttons button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #99d3ce;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Added transform for hover effect */
+        }
+
+        .case-buttons button:hover {
+            background-color: #c3e2e0;
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        /* Introduction Text */
+        .introduction {
+            padding: 20px;
+            color: #333; /* Darker color for better readability */
+            line-height: 1.6; /* Increased line height for better spacing */
+        }
+
+        /* Doctor Profiles Section */
+        .profile-section {
+            padding: 20px;
+        }
+
+        .doctor-profile {
+            padding: 20px;
+            margin: 20px auto;
+            background-color: #e6f2ff;
+            border-radius: 8px;
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            scroll-margin-top: 80px; /* Offset for smooth scrolling */
+        }
+
+        .doctor-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .doctor-info h3 {
+            font-size: 1.8rem;
+            color: #0b5b40;
+            margin: 10px 0 5px;
+        }
+
+        .doctor-info p {
+            color: #555;
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .doctor-info .specialization {
+            color: #06917a;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #04896f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+         <!-- Logo -->
+        <div>
+            <h1><marquee direction="left" scollamount="5">Welcome to Smile D Care</marquee></h1>
+            <p><marquee direction="left" scollamount="5" >Your Health, Our Priority – Meet Our Expert Doctors</marquee></p>
+        </div>
+    </header>
+    <div class="case-buttons">
+        <button onclick="document.getElementById('general-dentist').scrollIntoView({ behavior: 'smooth' });">General Dentistry</button>
+        <button onclick="document.getElementById('endodontist').scrollIntoView({ behavior: 'smooth' });">Endodontics</button>
+        <button onclick="document.getElementById('orthodontist').scrollIntoView({ behavior: 'smooth' });">Orthodontics</button>
+        <button onclick="document.getElementById('Periodontics').scrollIntoView({ behavior: 'smooth' });">Periodontics</button>
+        <button onclick="document.getElementById('oral_surgeon').scrollIntoView({ behavior: 'smooth' });">Oral Surgery</button>
+    </div>
+
+
+    <p class="introduction"><b><i>Welcome to Smile D Care</i></b>, where we believe a healthy smile is the foundation of a confident and vibrant life. Our clinic is committed to delivering top-quality dental care in a compassionate, patient-centered environment. Whether you're here for a routine check-up, specialized treatment, or emergency care, our dedicated team of experienced professionals is ready to provide you with a comfortable and personalized dental experience.<br>
+
+    <br>At Smile D Care, we take pride in offering a wide range of services tailored to meet the needs of every member of your family. <br>Our services include:<br>
+
+    <b>General Dentistry:</b> Routine check-ups, cleanings, fillings, and preventative care to keep your teeth and gums healthy.<br>
+    <b>Cosmetic Dentistry:</b> Teeth whitening, veneers, and bonding procedures designed to enhance your smile.<br>
+    <b>Orthodontics:</b> Braces and aligners to help straighten teeth and improve your bite, with treatment plans for both children and adults.<br>
+    <b>Endodontics:</b> Root canal treatments to save damaged or infected teeth, performed with advanced techniques to ensure maximum comfort.<br>
+    <b>Oral Surgery: </b>Wisdom teeth extraction, dental implants, and other surgical procedures performed by our skilled oral surgeons.<br>
+    <b>Pediatric Dentistry:</b> Special care for children’s dental needs, creating a positive and friendly experience to set the foundation for lifelong oral health.<br>
+
+    <br>Our clinic is equipped with state-of-the-art technology and follows the highest standards in sterilization and infection control, ensuring that every visit is both safe and effective. Our team of highly qualified dentists and support staff are committed to continuous learning and stay updated on the latest advancements in dental care to offer you the best treatments available.
+
+    We understand that dental visits can sometimes cause anxiety, so we go the extra mile to create a welcoming and relaxing environment. Our patient-first approach means that we listen to your concerns, explain your options, and work together to achieve the best outcomes for your oral health.
+
+    <br><i>At Smile D Care, we’re not just treating teeth—we’re caring for people. Let us help you achieve a healthy, beautiful smile that you can be proud of.</i></p>
+
+    <!-- Case Buttons for Navigation -->
+    
+    <!-- Doctor Profiles Section -->
+    <section class="profile-section">
+        <!-- Doctor 1 -->
+        <div id="general-dentist" class="doctor-profile">
+            <img src="{% static 'images/pro.jpg' %}" alt="Doctor 1" class="doctor-img">
+            <div class="doctor-info">
+                <h3>Dr. Ahmed Sahir</h3>
+                <p class="specialization">General Dentist</p>
+                <p>Qualification: DDS, MDS</p>
+                <p>Experience: 10+ Years</p>
+                <p>Specializes in routine dental checkups and preventive care.</p>
+            </div>
+        </div>
+
+        <!-- Doctor 2 -->
+        <div id="endodontist" class="doctor-profile">
+            <img src="{% static 'images/pro.jpg' %}" alt="Doctor 2" class="doctor-img">
+            <div class="doctor-info">
+                <h3>Dr. Saniya</h3>
+                <p class="specialization">Endodontist</p>
+                <p>Qualification: BDS, MDS</p>
+                <p>Experience: 8+ Years</p>
+                <p>Expert in root canal treatments and restorative dental procedures.</p>
+            </div>
+        </div>
+
+        <!-- Doctor 3 -->
+        <div id="orthodontist" class="doctor-profile">
+            <img src="{% static 'images/pro.jpg' %}" alt="Doctor 3" class="doctor-img">
+            <div class="doctor-info">
+                <h3>Dr. Gowtham</h3>
+                <p class="specialization">Orthodontist</p>
+                <p>Qualification: BDS, MDS</p>
+                <p>Experience: 12+ Years</p>
+                <p>Specializes in braces and aligners for both children and adults.</p>
+            </div>
+        </div>
+        <div id="Periodontics" class="doctor-profile">
+            <img src="{% static 'images/pro.jpg' %}" alt="Doctor 4" class="doctor-img">
+            <div class="doctor-info">
+                <h3>Dr. James Mathew</h3>
+                <p class="specialization">Periodontics</p>
+                <p>Qualification: DDS, DMD</p>
+                <p>Experience: 3+ Years</p>
+                <p>Specializes in dental implant.</p>
+            </div>
+        </div>
+        <div id="oral_surgeon" class="doctor-profile">
+            <img src="{% static 'images/pro.jpg' %}" alt="Doctor 1" class="doctor-img">
+            <div class="doctor-info">
+                <h3>Dr. Fida Fathima </h3>
+                <p class="specialization">Oral Surgeon</p>
+                <p>Qualification: DDS, DMD</p>
+                <p>Experience: 5+ Years</p>
+                <p>Specializes implants.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Smile D Care. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

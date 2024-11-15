@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doctor Appointment Booking</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <style>
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color:rgb(223, 220, 220); /* Light background for better contrast */
+    background-color:rgb(223, 220, 220);
 }
 
 /* Navbar Styles */
@@ -43,13 +44,13 @@ body {
     margin-bottom: 30px;
     text-align: center;
     font-size: 2rem;
-    color: #343a40; /* Darker text for headings */
+    color: #343a40;
 }
 
 .card {
-width:250px;
-height:395px;
-    margin-bottom: 30px;
+    width: 250px;
+    height: 395px;
+    margin-bottom: 8px;
     border-radius: 8px;
     transition: transform 0.2s;
 }
@@ -68,25 +69,29 @@ height:395px;
 .form-group {
     margin-bottom: 10px;
 }
-
+#token-container button {
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+}
 .btn-success {
-    background-color: #23b9fe; /* Bootstrap success color */
+    background-color: #23b9fe;
     border: none;
 }
 
 .btn-success:hover {
-    background-color: #597d79; /* Darker green on hover */
+    background-color: #597d79;
 }
 
 /* Footer Styles */
 footer {
-    background-color: #e9ecef; /* Light grey for footer */
-    border-top: 1px solid #dee2e6; /* Subtle border on top of footer */
+    background-color: #e9ecef;
+    border-top: 1px solid #dee2e6;
 }
 
 footer p {
     margin: 0;
-    color: #6c757d; /* Grey text color */
+    color: #6c757d;
 }
 
 /* Responsive Styles */
@@ -100,7 +105,7 @@ footer p {
     }
 
     .card {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 }
 </style>
@@ -114,8 +119,8 @@ footer p {
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="home/">Home</a></li>
-        
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="aboutus/">About Us</a></li>
       </ul>
     </div>
   </nav>
@@ -129,132 +134,285 @@ footer p {
         <a href="#appointment" class="btn btn-primary">Book Appointment</a>
       </div>
       <div class="col-lg-6">
-        <img src="teeth.jpg" alt="Doctor" class="img-fluid">
+        <img src="{% static 'images/teeth.jpg' %}" alt="Doctor" class="img-fluid">
       </div>
     </div>
   </section>
 
   <!-- Doctors Section -->
   <section id="doctors" class="container mt-5">
-    <h2>Available Doctors</h2>
+    <h2>Our Services</h2>
     <div class="row">
-      <!-- Doctor Card -->
-      <div class="col-md-4">
-        <div class="card">
-          <img src="pro.jpg" class="card-img-top" alt="Doctor">
-          <div class="card-body">
-            <h5 class="card-title">Dr. John Doe</h5>
-            <p class="card-text">Specialist in Neurology</p>
-            <a href="#appointment" class="btn btn-primary">Book Now</a>
-          </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'images/teeth.jpg' %}" class="card-img-top" alt="Doctor">
+                <div class="card-body">
+                    <h5 class="card-title">General Dentist</h5>
+                    <p class="card-text">Dr. Ahmed Sahir</p>
+                    <a href="#appointment" class="btn btn-primary" onclick="selectDoctor('Dr. Ahmed Sahir','General Dentist')">Book Now</a>
+                </div>
+            </div>
         </div>
-      </div>
-<div class="col-md-4">
-        <div class="card">
-          <img src="pro.jpg" class="card-img-top" alt="Doctor">
-          <div class="card-body">
-            <h5 class="card-title">Dr. Praveena Raj</h5>
-            <p class="card-text">Specialist in Orthodontics</p>
-            <a href="#appointment" class="btn btn-primary">Book Now</a>
-          </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'images/implant.jpg' %}" class="card-img-top" alt="Doctor">
+                <div class="card-body">
+                    <h5 class="card-title">Endodontist</h5>
+                    <p class="card-text">Dr. Saniya</p>
+                    <a href="#appointment" class="btn btn-primary" onclick="selectDoctor('Dr. Saniya','Endodontics')">Book Now</a>
+                </div>
+            </div>
         </div>
-      </div>
-<div class="col-md-4">
-        <div class="card">
-          <img src="pro.jpg" class="card-img-top" alt="Doctor">
-          <div class="card-body">
-            <h5 class="card-title">Dr. Rahman</h5>
-            <p class="card-text">Specialist in Root Canal</p>
-            <a href="#appointment" class="btn btn-primary">Book Now</a>
-          </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'images/orthodontics.jpeg' %}" class="card-img-top" alt="Doctor">
+                <div class="card-body">
+                    <h5 class="card-title">Orthodontist</h5>
+                    <p class="card-text">Dr. Gowtham</p>
+                    <a href="#appointment" class="btn btn-primary" onclick="selectDoctor('Dr. Gowtham','Orthodontics')">Book Now</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="pro.jpg" class="card-img-top" alt="Doctor">
-          <div class="card-body">
-            <h5 class="card-title">Dr. Saniya</h5>
-            <p class="card-text">Specialist in Implantation</p>
-            <a href="#appointment" class="btn btn-primary">Book Now</a>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- Booking Section -->
   <section id="appointment" class="container mt-5">
     <h2>Book an Appointment</h2>
-    <form>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter your name">
-      </div>
-      <div class="form-group">
-        <label for="case">Select Case</label>
-        <select class="form-control" id="case">
-          <option>Cleaning</option>
-          <option>Orthodontics</option>
-          <option>Root Canal</option>
-          <option>Implantation</option>
-          <!-- Add more doctors -->
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="doctor">Select Doctor</label>
-        <select class="form-control" id="doctor">
-          <option>Dr. John Doe</option>
-          <option>Dr. Praveena Raj</option>
-          <option>Dr. Rahman</option>
-          <option>Dr. Saniya</option>
-          <!-- Add more doctors -->
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="date">Appointment Date</label>
-        <input type="date" class="form-control" id="date">
-      </div>
-      <div class="form-group"></div>
-        <label for="time">Appointment Time</label>
-        <input type="time" class="form-control" id="time">
-      </div>
-      <button type="submit" class="btn btn-success">Confirm Appointment</button>
+    <form method="post" action="{% url 'appointment' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="patient" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label for="case">Select Case</label>
+            <input type="text" class="form-control" id="case" name="case" readonly required>
+        </div>
+        <div class="form-group">
+            <label for="doctor">Select Doctor</label>
+            <input type="text" class="form-control" id="doctor" name="doctor" readonly required>
+        </div>
+        <div class="form-group">
+            <label for="date">Appointment Date</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="time">Select Session</label>
+            <select class="form-control" id="time" name="time" required onchange="fetchAvailableTokens()">
+                <option value="">Select</option>
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="slot">Select Slot</label>
+            <select class="form-control" id="slot" name="slot" required onchange="fetchAvailableTokens()">
+                <!-- Options will be populated dynamically based on selected session -->
+            </select>
+        </div>
+  
+        <div class="form-group">
+            <label>Select a Token</label>
+            <div id="token-container" class="d-flex flex-wrap">
+                <!-- Token buttons will be dynamically inserted here -->
+            </div>
+        </div>
+  
+        <!-- Hidden input to store selected token -->
+        <input type="hidden" id="selected-token" name="token" required>
+  
+        <button type="submit" class="btn btn-success">Confirm Appointment</button>
     </form>
   </section>
-
-  <!-- Footer -->
   
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <footer class="bg-light text-center py-4">
+    <p>&copy;2024 Smile D care. All rights reserved.</p>
+  </footer>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const appointmentForm = document.querySelector('form');
-
-    // Handle form submission
-    appointmentForm.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        // Get form values
-        const name = document.getElementById('name').value;
-        
-        const doctor = document.getElementById('doctor').value;
-        const date = document.getElementById('date').value;
-        const time = document.getElementById('time').value;
-        
-        // Basic validation
-        if (!name ||  !doctor || !date ||!time) {
-            alert('Please fill out all fields.');
-            return;
-        }
-
-        // Display confirmation alert
-        alert(`Appointment booked successfully!\n\nDetails:\nName: ${name}\nDoctor: ${doctor}\nDate: ${date}\nTime: ${time}`);
-
-        // Optionally, reset the form
-        appointmentForm.reset();
-    });
+  document.addEventListener('DOMContentLoaded', function () {
+    // Function to set doctor and case details
+    window.selectDoctor = function(doctorName, specialty) {
+        document.getElementById('doctor').value = doctorName;
+        document.getElementById('case').value = specialty;
+    };
 });
+// Function to fetch and display available slots based on session selection
+function fetchSlots() {
+    const time = document.getElementById('time').value;
+    const slotSelect = document.getElementById('slot');
+    
+    slotSelect.innerHTML = '';  // Clear previous slots
+
+    if (time === 'Morning') {
+        // Morning session slots
+        slotSelect.innerHTML += `<option value="9.30-10.45">9.30AM-10.45AM</option>
+                                 <option value="11.00-12.00">11.00AM-12.00PM</option>
+                                 <option value="12:00-01:00">12:00PM-01:00PM</option>`;
+    } else if (time === 'Afternoon') {
+        // Afternoon session slots
+        slotSelect.innerHTML += `<option value="2:00-3:00">2:00PM-3:00PM</option>
+                                 <option value="3:00-4:00">3:00PM-4:00PM</option>
+                                 <option value="4:15-5:00">4:00PM-5:15PM</option>
+                                 <option value="5:00-6:00">5:00PM-6:00PM</option>`;
+    }
+}
+
+// Update fetchAvailableTokens to include slot selection and token ranges
+function fetchAvailableTokens() {
+    const doctor = document.getElementById('doctor').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const slot = document.getElementById('slot').value;
+
+    if (doctor && date && time && slot) {
+        fetch(`/get_available_tokens/?doctor=${doctor}&date=${date}&time=${time}&slot=${slot}`)
+        .then(response => response.json())
+        .then(data => {
+            const tokenContainer = document.getElementById('token-container');
+            tokenContainer.innerHTML = '';  // Clear previous tokens
+
+            // Determine token range based on the selected slot
+            let tokenStart = 1;
+            if (time === 'Morning') {
+                if (slot === "9.30-10.45") {
+                    tokenStart = 1;
+                } else if (slot === "11.00-12.00") {
+                    tokenStart = 7;
+                } else if (slot === "12:00-01:00") {
+                    tokenStart = 13;
+                }
+            } else if (time === 'Afternoon') {
+                if (slot === "2:00-3:00") {
+                    tokenStart = 19;
+                } else if (slot === "3:00-4:00") {
+                    tokenStart = 25;
+                } else if (slot === "4:15-5:00") {
+                    tokenStart = 31;
+                } else if (slot === "5:00-6:00") {
+                    tokenStart = 37;
+                }
+            }
+
+            // Generate tokens (5 tokens per slot)
+            for (let i = 0; i < 6; i++) {
+                const token = tokenStart + i;
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'btn btn-outline-primary m-1';
+                button.textContent = token;
+
+                // Disable booked tokens
+                if (data.bookedTokens.includes(token)) {
+                    button.disabled = true;
+                    button.classList.add('btn-secondary');
+                } else {
+                    button.onclick = function() {
+                        selectToken(token);
+                    };
+                }
+                tokenContainer.appendChild(button);
+            }
+        })
+        .catch(error => console.error('Error fetching tokens:', error));
+    }
+}
+
+// Function to handle token selection
+function selectToken(token) {
+    document.getElementById('selected-token').value = token;
+    const buttons = document.querySelectorAll('#token-container button');
+    buttons.forEach(btn => btn.classList.remove('btn-primary'));
+    buttons.forEach(btn => {
+        if (btn.textContent == token) {
+            btn.classList.add('btn-primary');
+        }
+    });
+}
+
+// Call fetchSlots when time (session) is selected
+document.getElementById('time').addEventListener('change', fetchSlots);
+document.getElementById('slot').addEventListener('change', fetchAvailableTokens);
+function checkDate() {
+    const dateInput = document.getElementById('date');
+    const selectedDate = new Date(dateInput.value);
+    
+    // Check if the selected date is a Sunday (0 = Sunday in JavaScript)
+    if (selectedDate.getDay() === 0) {
+        alert("Appointments cannot be booked on Sundays.");
+        dateInput.value = '';  // Reset the date field
+    }
+}
+
+// Function to fetch and display available slots based on session selection
+// function fetchSlots() {
+//     const time = document.getElementById('time').value;
+//     const slotSelect = document.getElementById('slot');
+    
+//     slotSelect.innerHTML = '';  // Clear previous slots
+
+//     if (time === 'Morning') {
+//         // Morning session slots
+//         slotSelect.innerHTML += `<option value="9.30-10.45">9.30AM-10.45AM</option>
+//                                  <option value="11.00-12.00">11.00AM-12.00PM</option>
+//                                  <option value="12:00-01:00">12:00PM-01:00PM</option>`;
+//     } else if (time === 'Afternoon') {
+//         // Afternoon session slots
+//         slotSelect.innerHTML += `<option value="2:00-3:00">2:00PM-3:00PM</option>
+//                                  <option value="3:00-4:00">3:00PM-4:00PM</option>
+//                                  <option value="4:15-5:00">4:00PM-5:15PM</option>
+//                                  <option value="5:00-6:00">5:00PM-6:00PM</option>`;
+//     }
+// }
+
+// // Update fetchAvailableTokens to include slot selection
+// function fetchAvailableTokens() {
+//     const doctor = document.getElementById('doctor').value;
+//     const date = document.getElementById('date').value;
+//     const time = document.getElementById('time').value;
+//     const slot = document.getElementById('slot').value;
+
+//     if (doctor && date && time && slot) {
+//         fetch(`/get_available_tokens/?doctor=${doctor}&date=${date}&time=${time}&slot=${slot}`)
+//         .then(response => response.json())
+//         .then(data => {
+//             const tokenContainer = document.getElementById('token-container');
+//             tokenContainer.innerHTML = '';  // Clear previous tokens
+
+//             for (let i = 1; i <= 5; i++) {  // Generate 5 tokens per slot
+//                 const button = document.createElement('button');
+//                 button.type = 'button';
+//                 button.className = 'btn btn-outline-primary m-1';
+//                 button.textContent = i;
+
+//                 if (data.bookedTokens.includes(i)) {
+//                     button.disabled = true;
+//                     button.classList.add('btn-secondary');
+//                 } else {
+//                     button.onclick = function() {
+//                         selectToken(i);
+//                     };
+//                 }
+//                 tokenContainer.appendChild(button);
+//             }
+//         })
+//         .catch(error => console.error('Error fetching tokens:', error));
+//     }
+// }
+// function selectToken(token){
+//     document.getElementById('selected-token').value=token;
+//     const buttons=document.querySelectorAll('#token-container button');
+//     buttons.forEach(btn=>btn.classList.remove('btn-primary'));
+//     nuttons.forEach(btn=>{
+//         if(btn.textContent==token){
+//             ntn.classList.add('btn-primary');
+//         }
+//     });
+// }
+// // Call fetchSlots when time (session) is selected
+// document.getElementById('time').addEventListener('change', fetchSlots);
+// document.getElementById('slot').addEventListener('slot').addEventListener('change',fetchAvailableTokens);
 </script>
+
 </body>
 </html>

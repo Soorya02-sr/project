@@ -1,11 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
+    
 <style>
 body{
-background-image:url('https://img1.wsimg.com/isteam/stock/V8BdjdQ/:/rs=w:1300,h:200,cg:true,m/cr=w:1300,h:650,a:cc');
+background-image:url('https://img1.wsimg.com/isteam/stock/V8BdjdQ/:/rs=w:1300,h:200,cg:true,m/cr=w:1200,h:650,a:cc');
 background-repeat:no-repeat;
 background-blend-mode:multiply;
 transition:transform 0.5s ease-in-out;
@@ -25,6 +27,22 @@ text-align:center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+nav {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #ffffff;
+            margin: 0 15px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        
 p{
 color:#ffffff;
 font-family: 'Montserrat', sans-serif;
@@ -38,19 +56,142 @@ font-size:35px;
 font-style:bold;
 font-family: 'Montserrat', sans-serif;
 }
+.profile-btn {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #007BFF;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile-btn:hover {
+    background-color: #0056b3;
+}
+
+.profile-icon {
+    width: 30px; /* Adjust size */
+    height: 30px; /* Adjust size */
+    object-fit: contain; /*Ensure image is properly contained */
+ }
+
+
+.appointment-btn{
+        float: right;
+        margin-top: 70px;
+        margin-right: 20px;
+        background-color: #007BFF;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .view-map-btn{
+    float: left;
+        margin-top: 60px;
+        margin-left: 20px;
+        background-color:#ffffff ;
+        color:  #007BFF;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .map-container {
+        display: flex;
+        justify-content: left;
+        margin-top: 5px;
+    }
+    .map-container iframe {
+        width: 250p;
+        height: 300px;
+        border: 0;
+    }
+    #map-section {
+    margin-top: 10px;  /* Add some space at the top */
+    .navbar-right {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+        .profile-icon {
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
+}
+    
 </style>
 
-<body>
-  
-<a href='login/' style="color:#ffffff;float:right;font-size: 20px;">Login</a>
-<a href='register/' style="color:#ffffff;float:right; font-size: 20px;">Register</a>
-<h5 style="color:#ffffff;float:left;font-family:'Montserrat', sans-serif;margin:1%;">CONTACT:8078007000</h1>
-<br><br><br><br><br><br><br><br><br>
+
+    <script>
+         function toggleDashboardMenu() {
+        var menu = document.getElementById("dashboard-menu");
+        menu.classList.toggle("show");
+    }
+       
+        
+   
+    function scrollToMap() {
+    document.getElementById("map-section").scrollIntoView({ behavior: "smooth" });
+}
+
+ 
+    </script>
+    </head>
+    <body>
+        
+        <nav>
+            
+            <a href="login/">Login</a>
+        
+        <a href="{% url 'appointment_history' %}">View Appointment </a>
+        
+            <a href="notification/">Notification</a>
+            <a href="feedback/">Feedback</a>
+            <a href="aboutus/">About Us</a>
+            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'view_prescription' %}">Prescription</a>
+            
+                <a href="{% url 'profile_update' %}" >
+                    <img src="{% static 'images/profile.jpg' %}" alt="Profile" class="profile-icon">
+                </a>
+            
+
+            </nav>
+        
+        {% if user.is_authenticated %}
+        <a href="{% url 'appointment' %}" class="appointment-btn">Appointment</a>
+    {% else %}
+        <a href="#" onclick="alert('Please login to book an appointment'); return false;" class="appointment-btn">Appointment</a>
+    {% endif %}
+    
+    <a href="#" onclick="scrollToMap()" class="view-map-btn">Locate Us</a>
+
+
+        
+    
+       
+            
+<br><br><br>
+<h5 style="color:#ffffff;float:left;font-family:'Montserrat', sans-serif;margin:1%;">CONTACT:8078007000</h5>
+<br><br><br><br><br><br><br>
 <h1>Smile D Care</h1>
 <p>Dental Clinic & Implant Center</p>
 <p>Sreekrishnapuram</p>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+<div id="map-section">
+<div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15671.192415528862!2d76.4072084!3d10.902943!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7d72e2a0c80f1%3A0x9ebd359ec144cdff!2sSreekrishnapuram%20Multi%20Speciality%20Dental%20Care!5e0!3m2!1sen!2sin!4v1730567936980!5m2!1sen!2sin" width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</div>
 <div class="parallax"></div>
 
 <div style="height:15px;font-size:36px">
@@ -64,7 +205,14 @@ font-family: 'Montserrat', sans-serif;
 <h6 style="text-align:center;font-family:Arial;color:grey;font-size:18px;">We offer broad array of services. <br>Our team has the professional experience to realize that there is no such thing as one-size-fits-all treatment, <br>so we never use a one-size-fits-all approach to your dental plan. </h6>
 <br><br><br>
 </center>
+
 <p data-aid="FOOTER_COPYRIGHT_RENDERED" data-route="copyright" style="color:black;font-size:10px;float:left;">Copyright © 2019 Smile D Care - All Rights Reserved.</p>
 </div><div class="parallax"></div>
+{% if messages %}
+    <script>
+        alert("Please login to book an appointment");
+    </script>
+{% endif %}
+
 </body>
 </html>

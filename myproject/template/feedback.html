@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback</title>
+    <style>
+        /* styles.css */
+
+body {
+    background-image: url('{% static "images/bg4.jpg" %}');
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color:transparent;
+    padding: 2rem;
+    border-radius: 8px;
+    border-color: #080606;
+    box-shadow: 0 4px 8px rgba(20, 20, 20, 0.813);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    
+}
+
+h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    resize: vertical;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    width: 95%;
+}
+
+textarea::placeholder {
+    color: #aaa;
+}
+
+.btn {
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2>Submit Feedback</h2>
+        <form id="feedbackForm" method="post" action="{% url 'submit_feedback' %}">
+            {% csrf_token %}
+            <textarea name="message" placeholder="Write your feedback here..." rows="4" required></textarea>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+             // Prevent the form from submitting immediately
+            alert('Submitted successfully'); // Show the alert message
+
+            // Optional: Submit the form after showing the alert
+            this.submit();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('{% static "images/room.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: left;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background:whitesmoke;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #343b40;
+        }
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            font-size: 0.9em; 
+        }
+        th, td {
+            padding: 3px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            word-wrap: break-word;
+        }
+        th {
+            background-color: #808e94;
+            color: rgb(255, 255, 255);
+        }
+        
+        tr:hover {
+            background-color: #d1ecf1;
+        }
+        footer {
+            text-align: center;
+            margin-top: 5px;
+            color: #e0e9f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Appointment Details</h2>
+
+    {% if messages %}
+        <div id="popup-message" class="alert alert-success" style="display: none;">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                
+                <th>Time</th>
+                <th>Slot</th>
+                <th>Doctor</th>
+                <th>Case</th>
+                <th>Token</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.slot }}</td>
+                <td>{{ appointment.doctor }}</td>
+                <td>{{ appointment.case }}</td>
+                <td>{{ appointment.token }}</td>
+                <td>{{ appointment.status }}</td>
+                <td>
+                    {% if appointment.status == "Active" %}
+                        <a href="{% url 'cancel_appointment' appointment.app_id %}" class="btn btn-danger btn-sm">Cancel</a>
+                    {% else %}
+                        <span class="text-muted">Canceled</span>
+                    {% endif %}
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<footer>
+    <p>&copy; 2024 Smile D Care. All rights reserved.</p>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Show the message pop-up if it exists
+        const popup = document.getElementById("popup-message");
+        if (popup) {
+            popup.style.display = "block";
+            setTimeout(function() {
+                popup.style.display = "none";
+            }, 3000);  // Hides the pop-up after 3 seconds
+        }
+    });
+    
+</script>
+</body>
+</html>
+{% endblock %}

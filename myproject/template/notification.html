@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        /* Base styles */
+        body {
+            background-image: url('{% static "images/bg5.jpg" %}');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            background-color: #dce2ee;
+            color: #333;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        h2, h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Notification list */
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Notification card styling */
+        .notification-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #eaf6f9;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* Hover effect on notification card */
+        .notification-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Notification message and time styling */
+        .notification-content {
+            max-width: 50%;
+        }
+
+        .notification-message {
+            font-size: 1em;
+            font-weight: 500;
+            margin: 0 0 5px;
+            color: #222;
+        }
+
+        .notification-time {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        /* Button styling */
+        .mark-read-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .mark-read-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Read label styling */
+        .read-label {
+            color: #5cb85c;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+{% if notifications %}
+    <!-- Unread Notifications Section -->
+    
+    <ul>
+        {% for notification in notifications %}
+            {% if not notification.is_read %}
+                <li class="notification-card">
+                    <div class="notification-content">
+                        <p class="notification-message">{{ notification.message }}</p>
+                        <p class="notification-time">{{ notification.created_at }}</p>
+                    </div>
+                    <form method="post" action="{% url 'mark_as_read' notification.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="mark-read-btn">Mark as Read</button>
+                    </form>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <!-- Past Notifications Section -->
+    
+    <ul>
+        {% for notification in notifications %}
+            {% if notification.is_read %}
+                <li class="notification-card">
+                    <div class="notification-content">
+                        <p class="notification-message">{{ notification.message }}</p>
+                        <p class="notification-time">{{ notification.created_at }}</p>
+                    </div>
+                    <div class="read-label">(Read)</div>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No notifications available.</p>
+{% endif %}
+
+</body>
+</html>

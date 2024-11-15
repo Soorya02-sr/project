@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <style>
+        /* Background and container styling */
+        body {
+            background-image: url('{% static "images/bg4.jpg" %}');
+            background-size: cover;
+            background-color: #f0f4f8;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .signup-container {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            width: 80%;
+            padding: 20px;
+        }
+        .signup-card {
+            background-color: #ffffffd9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Reduced size */
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .signup-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header styling */
+        .signup-card h2 {
+            font-size: 22px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 10px; /* Reduced space */
+        }
+        .form-group label {
+            font-size: 14px; /* Smaller font size */
+            color: #555;
+        }
+        .form-control {
+            width: 60%;
+            padding: 8px; /* Reduced padding */
+            border-radius: 5px;
+            border: 1px solid #d1e0e0;
+            font-size: 14px; /* Smaller font size */
+            box-sizing: border-box;
+            background-color: #f9fbfc;
+            color: #333;
+            transition: border 0.2s;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Select styling */
+        .form-control select {
+            appearance: none;
+            padding-right: 8px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            width: 100%;
+            padding: 10px; /* Reduced padding */
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 15px; /* Smaller font size */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <div class="signup-card">
+        <h2>Update Profile</h2>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ patient.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" value="{{ patient.age }}" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Contact No:</label>
+                <input type="text" class="form-control" id="mobile" name="mobile" maxlength="10" value="{{ patient.mobile }}" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control" id="gender" name="gender" required>
+                    {% for key, label in patient.GENDER_CHOICES %}
+                        <option value="{{ key }}" {% if patient.gender == key %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="place">Place:</label>
+                <input type="text" class="form-control" id="place" name="place" value="{{ patient.place }}" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
